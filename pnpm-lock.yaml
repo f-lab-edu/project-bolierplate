@@ -171,6 +171,9 @@ importers:
       webpack-dev-server:
         specifier: ^5.0.4
         version: 5.0.4(webpack-cli@5.1.4)(webpack@5.91.0)
+      webpack-merge:
+        specifier: ^5.10.0
+        version: 5.10.0
 
 packages:
 
