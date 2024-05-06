@@ -22,13 +22,12 @@ function combineRefs<T>(...refs: (Ref<T> | undefined)[]) {
 export const SlotClone = forwardRef((props: SlotProps, forwardedRef: ForwardedRef<HTMLElement>) => {
   const { children, ...slotProps } = props;
 
-  // children 의 갯수 검사
   if (Children.count(children) > MAX_NUM_OF_SLOTTED_CHILDREN) {
-    return Children.only(null);
+    throw new Error("Slot 컴포넌트의 children props 에는 단일 ReactElement 만 전달할 수 있습니다.");
   }
 
-  // children 이 ReactElement 인지 검사
-  else if (isValidElement(children)) {
+  // children 이 ReactElement 인지 체크
+  if (isValidElement(children)) {
     return cloneElement<ComponentPropsWithRef<"element">>(children as ReactElement, {
       ...MergeProps.setProps(slotProps, children.props)
         .mergeEventHandlers()
