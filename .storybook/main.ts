@@ -9,6 +9,7 @@ const config: StorybookConfig = {
     "@storybook/addon-essentials",
     "@chromatic-com/storybook",
     "@storybook/addon-interactions",
+    "@storybook/addon-webpack5-compiler-babel",
   ],
   framework: {
     name: "@storybook/react-webpack5",
@@ -16,6 +17,18 @@ const config: StorybookConfig = {
   },
   docs: {
     autodocs: "tag",
+  },
+  babel: async (config, { configType }) => {
+    if (configType === "DEVELOPMENT") {
+      return {
+        presets: ["@babel/preset-env", "@babel/preset-typescript", ["@babel/preset-react", { runtime: "automatic" }]],
+      };
+    } else {
+      return {
+        presets: ["@babel/preset-env", "@babel/preset-typescript", ["@babel/preset-react", { runtime: "automatic" }]],
+        plugins: ["transform-remove-console"],
+      };
+    }
   },
 };
 export default config;
