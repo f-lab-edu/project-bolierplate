@@ -1,6 +1,6 @@
 import { forwardRef } from "react";
 
-import { SlotClone } from "../SlotClone";
+import { SlotClone } from "../SlotClone/SlotClone";
 
 import type { SlotProps } from "./Slot.types";
 import type { ForwardedRef } from "react";
