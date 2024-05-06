@@ -1,4 +1,5 @@
 import { VanillaExtractPlugin } from "@vanilla-extract/webpack-plugin";
+import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 import { mergeWithRules } from "webpack-merge";
 
 import webpackBaseConfig from "./webpack.config.base";
@@ -31,6 +32,14 @@ const webpackProdConfig: Configuration = {
   plugins: [
     new VanillaExtractPlugin({
       identifiers: "short",
+    }),
+    new ForkTsCheckerWebpackPlugin({
+      typescript: {
+        diagnosticOptions: {
+          semantic: true,
+          syntactic: true,
+        },
+      },
     }),
   ],
 };

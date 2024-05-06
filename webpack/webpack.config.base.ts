@@ -1,6 +1,5 @@
 import path from "path";
 
-import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 import HTMLWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 
@@ -49,14 +48,6 @@ const webpackBaseConfig: Configuration = {
       template: "./index.html",
       hash: true,
       cache: true,
-    }),
-    new ForkTsCheckerWebpackPlugin({
-      typescript: {
-        diagnosticOptions: {
-          semantic: true,
-          syntactic: true,
-        },
-      },
     }),
     new MiniCssExtractPlugin(),
   ],
