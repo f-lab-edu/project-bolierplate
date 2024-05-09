@@ -8,6 +8,14 @@ const preview: Preview = {
         date: /Date$/i,
       },
     },
+    docs: {
+      canvas: {
+        sourceState: "shown",
+      },
+      source: {
+        format: true,
+      },
+    },
   },
 };
 
