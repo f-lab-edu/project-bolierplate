@@ -42,6 +42,12 @@ importers:
       '@commitlint/types':
         specifier: ^19.0.3
         version: 19.0.3
+      '@storybook/addon-actions':
+        specifier: ^8.0.10
+        version: 8.0.10
+      '@storybook/addon-console':
+        specifier: ^3.0.0
+        version: 3.0.0(@storybook/addon-actions@8.0.10)(react@18.2.0)
       '@storybook/addon-essentials':
         specifier: ^8.0.8
         version: 8.0.8(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -1439,11 +1445,20 @@ packages:
   '@sinclair/typebox@0.27.8':
     resolution: {integrity: sha512-+Fj43pSMwJs4KRrH/938Uf+uAELIgVBmQzg/q1YG10djyfA3TnrU8N8XzqCh/okZdszqBQTZf96idMfE5lnwTA==}
 
+  '@storybook/addon-actions@8.0.10':
+    resolution: {integrity: sha512-IEuc30UAFl7Ws0GwaY/whjBnGaViVEVjmPc+MXUym2wwwJbnCbI+BKJxPoYi/I7QJb5aUNToAE6pl2pDda2g3Q==}
+
   '@storybook/addon-actions@8.0.8':
     resolution: {integrity: sha512-F3qpN0n53d058EroW1A2IlzrsFNR5p2srLY4FmXB80nxAKV8oqoDI4jp15zYlf8ThcJoQl36plT8gx3r1BpANA==}
 
   '@storybook/addon-backgrounds@8.0.8':
     resolution: {integrity: sha512-lrAJjVxDeXSK116rDajb56TureZiT76ygraP22/IvU3IcWCEcRiKYwlay8WgCTbJHtFmdBpelLBapoT46+IR9Q==}
+
+  '@storybook/addon-console@3.0.0':
+    resolution: {integrity: sha512-2pD2c9KNWuPIWlprqmWoZYrNQnG2qoDg7fAAXXNK6YDc5x/ZpK0cfOyfz/Gpdeje4QUmttZKAVjH0nOZDuxfvw==}
+    peerDependencies:
+      '@storybook/addon-actions': '*'
+      react: '*'
 
   '@storybook/addon-controls@8.0.8':
     resolution: {integrity: sha512-7xANN18CLYsVthuSXwxKezqpelEKJlT9xaYLtw5vvD00btW5g3vxq+Z/A31OkS2OuaH2bE0GfRCoG2OLR8yQQA==}
@@ -1534,6 +1549,9 @@ packages:
 
   '@storybook/core-common@8.0.8':
     resolution: {integrity: sha512-CL15M2oeQW+Rb1l7ciunLDI2Re+ojL2lX1ZFAiDedcOU+JHsdq43zAuXoZVzp8icUi2AUSwEjZIxGCSingj+JQ==}
+
+  '@storybook/core-events@8.0.10':
+    resolution: {integrity: sha512-TuHPS6p5ZNr4vp4butLb4R98aFx0NRYCI/7VPhJEUH5rPiqNzE3PZd8DC8rnVxavsJ+jO1/y+egNKXRYkEcoPQ==}
 
   '@storybook/core-events@8.0.8':
     resolution: {integrity: sha512-PtuvR7vS4glDEdCfKB4f1k3Vs1C3rTWP2DNbF+IjjPhNLMBznCdzTAPcz+NUIBvpjjGnhKwWikJ0yj931YjSVg==}
@@ -7483,6 +7501,15 @@ snapshots:
 
   '@sinclair/typebox@0.27.8': {}
 
+  '@storybook/addon-actions@8.0.10':
+    dependencies:
+      '@storybook/core-events': 8.0.10
+      '@storybook/global': 5.0.0
+      '@types/uuid': 9.0.8
+      dequal: 2.0.3
+      polished: 4.3.1
+      uuid: 9.0.1
+
   '@storybook/addon-actions@8.0.8':
     dependencies:
       '@storybook/core-events': 8.0.8
@@ -7497,6 +7524,12 @@ snapshots:
       '@storybook/global': 5.0.0
       memoizerific: 1.11.3
       ts-dedent: 2.2.0
+
+  '@storybook/addon-console@3.0.0(@storybook/addon-actions@8.0.10)(react@18.2.0)':
+    dependencies:
+      '@storybook/addon-actions': 8.0.10
+      '@storybook/global': 5.0.0
+      react: 18.2.0
 
   '@storybook/addon-controls@8.0.8(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
@@ -7849,6 +7882,10 @@ snapshots:
     transitivePeerDependencies:
       - encoding
       - supports-color
+
+  '@storybook/core-events@8.0.10':
+    dependencies:
+      ts-dedent: 2.2.0
 
   '@storybook/core-events@8.0.8':
     dependencies:
