@@ -42,6 +42,9 @@ importers:
       '@commitlint/types':
         specifier: ^19.0.3
         version: 19.0.3
+      '@storybook/addon-a11y':
+        specifier: ^8.1.0
+        version: 8.1.0
       '@storybook/addon-actions':
         specifier: ^8.0.10
         version: 8.0.10
@@ -1445,6 +1448,9 @@ packages:
   '@sinclair/typebox@0.27.8':
     resolution: {integrity: sha512-+Fj43pSMwJs4KRrH/938Uf+uAELIgVBmQzg/q1YG10djyfA3TnrU8N8XzqCh/okZdszqBQTZf96idMfE5lnwTA==}
 
+  '@storybook/addon-a11y@8.1.0':
+    resolution: {integrity: sha512-oJBi0nxxf6kwjZpUTVX+OynQnNIA3Nj8ZDtCrKhW+bU+bumOgi8I0wu40/pP8LCbNVLGUs8UMookKNMqKdnnLA==}
+
   '@storybook/addon-actions@8.0.10':
     resolution: {integrity: sha512-IEuc30UAFl7Ws0GwaY/whjBnGaViVEVjmPc+MXUym2wwwJbnCbI+BKJxPoYi/I7QJb5aUNToAE6pl2pDda2g3Q==}
 
@@ -1471,6 +1477,9 @@ packages:
 
   '@storybook/addon-highlight@8.0.8':
     resolution: {integrity: sha512-KKD7xiNhxZQM4fdDidtcla6jSzgN1f9qe1AwFSHLXwIW22+4c97Vgf+AookN7cJvB77HxRUnvQH//zV1CJEDug==}
+
+  '@storybook/addon-highlight@8.1.0':
+    resolution: {integrity: sha512-bH9WiJdw69ZDvr5XyPJG6Fqlpn9lQujkdCeWy6fqFnqR4SCqNlmEiwgDptrUt76Q9SDA+hc6twreCXz0GkgALg==}
 
   '@storybook/addon-interactions@8.0.8':
     resolution: {integrity: sha512-UOPKOe97uV4psH1O1YeE0oFuUQgD1Vkv95JjHjQG8KiPWvwdiezV7rrjPvw8RApnSKUopjFETs8F5D59i4eARw==}
@@ -2408,6 +2417,10 @@ packages:
   available-typed-arrays@1.0.7:
     resolution: {integrity: sha512-wvUjBtSGN7+7SjNpq/9M2Tg350UZD3q62IFZLbRAR1bSMlCo1ZaeW+BJ+D090e4hIIZLBcTDWe4Mh4jvUDajzQ==}
     engines: {node: '>= 0.4'}
+
+  axe-core@4.9.1:
+    resolution: {integrity: sha512-QbUdXJVTpvUTHU7871ppZkdOLBeGUKBQWHkHrvN2V9IQWGMt61zf3B45BtzjxEJzYuj0JBjBZP/hmYS/R9pmAw==}
+    engines: {node: '>=4'}
 
   babel-core@7.0.0-bridge.0:
     resolution: {integrity: sha512-poPX9mZH/5CSanm50Q+1toVci6pv5KSRv/5TWCwtzQS5XEwn40BcCrgIeMFWP9CKKIniKXNxoIOnOq4VVlGXhg==}
@@ -7501,6 +7514,11 @@ snapshots:
 
   '@sinclair/typebox@0.27.8': {}
 
+  '@storybook/addon-a11y@8.1.0':
+    dependencies:
+      '@storybook/addon-highlight': 8.1.0
+      axe-core: 4.9.1
+
   '@storybook/addon-actions@8.0.10':
     dependencies:
       '@storybook/core-events': 8.0.10
@@ -7593,6 +7611,10 @@ snapshots:
       - supports-color
 
   '@storybook/addon-highlight@8.0.8':
+    dependencies:
+      '@storybook/global': 5.0.0
+
+  '@storybook/addon-highlight@8.1.0':
     dependencies:
       '@storybook/global': 5.0.0
 
@@ -9099,6 +9121,8 @@ snapshots:
   available-typed-arrays@1.0.7:
     dependencies:
       possible-typed-array-names: 1.0.0
+
+  axe-core@4.9.1: {}
 
   babel-core@7.0.0-bridge.0(@babel/core@7.24.4):
     dependencies:
