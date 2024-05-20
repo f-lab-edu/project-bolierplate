@@ -1,4 +1,11 @@
-import type { ComponentPropsWithoutRef, DetailedHTMLProps, HTMLAttributes, ElementType } from "react";
+import type {
+  ComponentPropsWithoutRef,
+  DetailedHTMLProps,
+  HTMLAttributes,
+  ElementType,
+  AriaAttributes,
+  AriaRole,
+} from "react";
 
 declare global {
   namespace JSX {
@@ -11,4 +18,6 @@ declare global {
     Comp extends ElementType,
     Props extends Record<string, unknown> = unknown,
   > = Combine<Combine<{ asChild?: boolean }, Props>, ComponentPropsWithoutRef<Comp>>;
+
+  type AriaAttributeWithRole = AriaAttributes & { role?: AriaRole };
 }
