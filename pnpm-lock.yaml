@@ -111,6 +111,9 @@ devDependencies:
   babel-plugin-transform-remove-console:
     specifier: ^6.9.4
     version: 6.9.4
+  chromatic:
+    specifier: ^11.3.5
+    version: 11.3.5
   css-loader:
     specifier: ^7.1.1
     version: 7.1.1(webpack@5.91.0)
