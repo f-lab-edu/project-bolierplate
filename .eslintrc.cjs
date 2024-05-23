@@ -20,7 +20,7 @@ module.exports = {
     "plugin:react-hooks/recommended",
     "plugin:prettier/recommended",
   ],
-  ignorePatterns: ["/dist", "!.storybook"],
+  ignorePatterns: ["/dist", "!.storybook", "README.md"],
   settings: {
     "import/resolver": {
       typescript: true,
@@ -45,6 +45,16 @@ module.exports = {
     {
       files: ["*.stories.@(ts|tsx|js|jsx|mjs|cjs)"],
       extends: ["plugin:storybook/recommended"],
+    },
+    {
+      files: ["*.mdx"],
+      extends: ["plugin:mdx/recommended"],
+      settings: {
+        "mdx/code-blocks": true,
+      },
+      rules: {
+        "@typescript-eslint/consistent-type-imports": "off",
+      },
     },
   ],
 };

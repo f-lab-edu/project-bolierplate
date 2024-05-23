@@ -1,0 +1,39 @@
+import { Canvas, Meta, ArgTypes } from "@storybook/blocks";
+
+import * as SlotStories from "./Slot.stories.tsx";
+
+<Meta title="Components/Slot" of={SlotStories} />
+
+# Slot
+
+`Slot` 컴포넌트는 자신의 `props` 를 `children` 의 `props` 와 병합한 후, `children` 을 반환하는 컴포넌트 입니다.  
+이때, `Slot` 컴포넌트는 `children` 으로 단일 `ReactElement` 만 받을 수 있습니다.
+
+<ArgTypes of={SlotStories} />
+
+## 사용예시
+
+<Canvas of={SlotStories.Default} />
+
+## ref
+
+`Slot` 컴포넌트와 `children` 모두에 `ref` 를 사용하여 `DOM` 을 참조할 경우, `ref` 는 모두 `children` 을 참조하게 됩니다.
+
+```jsx
+<Slot ref={(node) => console.log(node)}>
+  <div ref={(node) => console.log(node)}>Hello Slot</div>
+</Slot>
+```
+
+## 이벤트 핸들러
+
+`Slot` 컴포넌트와 `children` 에 같은 종류의 이벤트 핸들러가 등록되었을 경우, `children` 의 이벤트가 실행된 후 `Slot` 컴포넌트의 이벤트가 실행됩니다.
+
+<Canvas of={SlotStories.SlotWithEventHandler} />
+
+## Slottable
+
+`Slottable` 컴포넌트는, `Slottable` 의 `children` 의 `children` 과 `Slottable` 의 외부의 있는 요소들을 합친 요소를 반환하는 컴포넌트 입니다.  
+`Slottable` 컴포넌트는 `Slot` 컴포넌트 내에 한개만 존재해야하며, `Slottable` 컴포넌트는 `ReactElement` 여야 합니다.
+
+<Canvas of={SlotStories.Slottable} />
