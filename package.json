@@ -9,8 +9,7 @@
     "lint": "eslint --no-error-on-unmatched-pattern --ext **/*.{tsx,ts,jsx,js,md,mdx} --fix",
     "prepare": "husky",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
-    "chromatic": "npx chromatic --project-token=chpt_1f9550acf81cf04"
+    "build-storybook": "storybook build"
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx}": "pnpm run lint"
