@@ -1,5 +1,8 @@
 import path from "path";
 
+import { VanillaExtractPlugin } from "@vanilla-extract/webpack-plugin";
+import MiniCssExtractPlugin from "mini-css-extract-plugin";
+
 import type { StorybookConfig } from "@storybook/react-webpack5";
 
 const config: StorybookConfig = {
@@ -12,6 +15,7 @@ const config: StorybookConfig = {
     "@chromatic-com/storybook",
     "@storybook/addon-interactions",
     "@storybook/addon-webpack5-compiler-babel",
+    "@storybook/addon-a11y",
   ],
   framework: {
     name: "@storybook/react-webpack5",
@@ -32,14 +36,62 @@ const config: StorybookConfig = {
       };
     }
   },
-  webpackFinal: async (config) => {
-    config.resolve?.alias &&
-      (config.resolve.alias = {
-        ...config.resolve.alias,
-        "@": path.resolve(__dirname, "../src"),
-      });
+  webpackFinal: async (config, { configType }) => {
+    const { resolve = {}, module = {}, plugins = [] } = config;
 
-    return config;
+    const moduleRules = module.rules ?? [];
+
+    const rulesWithoutCss = moduleRules.filter((rule) => {
+      if (rule && typeof rule === "object" && "test" in rule && rule.test instanceof RegExp) {
+        return !rule.test.test(".css");
+      }
+      return true;
+    });
+
+    if (configType === "DEVELOPMENT") {
+      plugins.push(
+        new VanillaExtractPlugin({
+          identifiers: "debug",
+        }),
+      );
+    } else {
+      plugins.push(
+        new VanillaExtractPlugin({
+          identifiers: "short",
+        }),
+      );
+    }
+
+    return {
+      ...config,
+      resolve: {
+        ...resolve,
+        alias: {
+          ...resolve.alias,
+          "@": path.resolve(__dirname, "../src"),
+        },
+      },
+      module: {
+        ...module,
+        rules: [
+          ...rulesWithoutCss,
+          {
+            test: /\.vanilla\.css$/i,
+            use: [
+              MiniCssExtractPlugin.loader,
+              {
+                loader: "css-loader",
+                options: {
+                  url: false,
+                },
+              },
+              "postcss-loader",
+            ],
+          },
+        ],
+      },
+      plugins: [...plugins, new MiniCssExtractPlugin()],
+    };
   },
 };
 export default config;
