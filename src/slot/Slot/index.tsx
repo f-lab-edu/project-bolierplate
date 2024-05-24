@@ -1,10 +1,10 @@
 import { Children, cloneElement, forwardRef, isValidElement } from "react";
 
-import { SlotClone } from "../SlotClone/SlotClone";
-import { isSlottable } from "../Slottable/Slottable";
+import { SlotClone } from "../SlotClone";
+import { isSlottable } from "../Slottable";
 
 import type { SlotProps } from "./Slot.types";
-import type { SlottableProps } from "../Slottable/Slottable.type";
+import type { SlottableProps } from "../Slottable/Slottable.types";
 import type { ForwardedRef, ReactElement } from "react";
 
 const MAX_NUM_OF_SLOTTABLE = 1;

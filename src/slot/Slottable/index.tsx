@@ -1,6 +1,6 @@
 import { isValidElement } from "react";
 
-import type { SlottableProps } from "./Slottable.type";
+import type { SlottableProps } from "./Slottable.types";
 import type { ReactElement, ReactNode } from "react";
 
 export function isSlottable(children: ReactNode): children is ReactElement {
