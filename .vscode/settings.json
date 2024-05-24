@@ -4,5 +4,11 @@
   "editor.codeActionsOnSave": {
     "source.fixAll": "always"
   },
-  "editor.tabSize": 2
+  "editor.tabSize": 2,
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.expand": false,
+  "explorer.fileNesting.patterns": {
+    "index.tsx": "*.types.ts, *.css.ts",
+    "*.stories.tsx": "$(capture).mdx"
+  }
 }
