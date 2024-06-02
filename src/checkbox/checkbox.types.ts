@@ -8,3 +8,5 @@ export interface CheckboxMachineContext extends CheckboxMachineInput {
   isControlled?: boolean;
   hover: boolean;
 }
+
+export type CheckboxMachineEvent = { type: "CHECKBOX.SET_CONTEXT"; context: Partial<CheckboxMachineContext> };
