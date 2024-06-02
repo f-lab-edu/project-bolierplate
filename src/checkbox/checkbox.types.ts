@@ -9,4 +9,8 @@ export interface CheckboxMachineContext extends CheckboxMachineInput {
   hover: boolean;
 }
 
-export type CheckboxMachineEvent = { type: "CHECKBOX.SET_CONTEXT"; context: Partial<CheckboxMachineContext> };
+export type CheckboxMachineEvent =
+  | { type: "CHECKBOX.SET_CONTEXT"; context: Partial<CheckboxMachineContext> }
+  | { type: "CHECKBOX.CHECKED" }
+  | { type: "CHECKBOX.UNCHECKED" }
+  | { type: "CHECKBOX.INDETERMINATE" };
