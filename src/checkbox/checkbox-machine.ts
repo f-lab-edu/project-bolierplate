@@ -1,6 +1,21 @@
-import { setup, assign } from "xstate";
+import { setup, assign, raise } from "xstate";
 
-import type { CheckboxMachineInput, CheckboxMachineContext, CheckboxMachineEvent } from "./checkbox.types";
+import type { CheckStatus, CheckboxMachineInput, CheckboxMachineContext, CheckboxMachineEvent } from "./checkbox.types";
+
+const getStateTransitionEventType = (checked?: CheckStatus): CheckboxMachineEvent => {
+  switch (checked) {
+    case "indeterminate": {
+      return { type: "CHECKBOX.INDETERMINATE" };
+    }
+    case true: {
+      return { type: "CHECKBOX.CHECKED" };
+    }
+    case false:
+    default: {
+      return { type: "CHECKBOX.UNCHECKED" };
+    }
+  }
+};
 
 export const checkboxMachine = setup({
   types: {
@@ -9,14 +24,19 @@ export const checkboxMachine = setup({
     events: {} as CheckboxMachineEvent,
   },
 
+  guards: {
+    isControlled: ({ context }) => !!context.isControlled,
+  },
+
   actions: {
     initContext: assign(({ context }) => ({ ...context, isControlled: context.checked !== undefined })),
     setContext: assign(({ event, context }) => {
       return event.type === "CHECKBOX.SET_CONTEXT" ? { ...context, ...event.context } : context;
     }),
+    syncControlledState: raise(({ context }) => getStateTransitionEventType(context.checked)),
   },
 }).createMachine({
-  /** @xstate-layout N4IgpgJg5mDOIC5QGMAWZkGsBGB7AHgMQDCAEgKLEDSAQgPIAaAdAMrkAqA+sXQHLvkG7ANoAGALqJQAB1ywAlgBd5uAHZSQ+RAEYATABoQATx26AvhcOrcEOBrQYcBDbIXK1GrQgCcTPQA5vUQA2XQBWQxMfMKYAFjCAZj0wyxAHLDx8JnTMSBc5JRV1JE1Ef20mUQSw7TDQiONEBITdJm9E5NSczKYAV1UcvJLXQo8Sr2D-JgSAdgao2Oq2jvCu9AyCJnlVW0UwACcAW22AQz38tyLPRDCZv11AkPDIxF1dX3ak1YszIA */
+  /** @xstate-layout N4IgpgJg5mDOIC5QGMAWZkGsBGB7AHgMQDCAEgKLEDSAQgPIAaAdAMrkAqA+sXQHLvkG7ANoAGALqJQAB1ywAlgBd5uAHZSQ+RAA4ArE20B2XQBoQAT0QBGAEwBfO2bQYcBEhWr1mbLj36CRK0kkEFkFZTUNLQQATismABYrBNEANhtTC0RdbRsmGLSMhyd0LDwiMkpaRiZK6nIAETFgmTklFXUQ6N1DM0sEAGZDVKZU3XTdYpBnMrc66uYAVV55xuaNMPbIruzerIQEwxjR8aLHadLXCo8FpgBJXgaOcgAlAFkHgEEBdZDNiM6oG6e36NkMAxOEwc51UuAgcA0MyuGzaAKiiBifWsVkMiUKk3OSPKTCRkBR4Q66MGNmOMRsViMmX6A10CXy+KmRIITAArqpSRByVtAZpEAMafl6YysQceuyoYTLsT5Kp4YowAAnAC2KoAhuqhWidtTaVLjDKMvECgqHEA */
   id: "checkbox",
 
   context: ({ input }) => {
@@ -29,9 +49,13 @@ export const checkboxMachine = setup({
   entry: ["initContext"],
 
   on: {
-    "CHECKBOX.SET_CONTEXT": {
-      actions: ["setContext"],
-    },
+    "CHECKBOX.SET_CONTEXT": [
+      { guard: "isControlled", actions: ["setContext", "syncControlledState"] },
+      { actions: ["setContext"] },
+    ],
+    "CHECKBOX.CHECKED": ".checked",
+    "CHECKBOX.UNCHECKED": ".unchecked",
+    "CHECKBOX.INDETERMINATE": ".indeterminate",
   },
 
   initial: "unchecked",
