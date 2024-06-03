@@ -1,3 +1,7 @@
+import type { checkboxMachine } from "./machine/checkbox-machine";
+
+export type CheckboxMachine = typeof checkboxMachine;
+
 export type CheckStatus = boolean | "indeterminate";
 
 export interface CheckboxMachineInput {

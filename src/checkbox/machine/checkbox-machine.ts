@@ -1,6 +1,11 @@
 import { setup, assign, raise } from "xstate";
 
-import type { CheckStatus, CheckboxMachineInput, CheckboxMachineContext, CheckboxMachineEvent } from "./checkbox.types";
+import type {
+  CheckStatus,
+  CheckboxMachineInput,
+  CheckboxMachineContext,
+  CheckboxMachineEvent,
+} from "../checkbox.types";
 
 const getStateTransitionEventType = (checked?: CheckStatus): CheckboxMachineEvent => {
   switch (checked) {
