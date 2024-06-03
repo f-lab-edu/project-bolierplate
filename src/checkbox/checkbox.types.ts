@@ -10,7 +10,7 @@ export interface CheckboxMachineContext extends CheckboxMachineInput {
 }
 
 export type CheckboxMachineEvent =
-  | { type: "CHECKBOX.SET_CONTEXT"; context: Partial<CheckboxMachineContext> }
+  | { type: "SET_CONTEXT"; context: Partial<CheckboxMachineContext> }
   | { type: "CHECKBOX.CHECKED" }
   | { type: "CHECKBOX.UNCHECKED" }
   | { type: "CHECKBOX.INDETERMINATE" };
