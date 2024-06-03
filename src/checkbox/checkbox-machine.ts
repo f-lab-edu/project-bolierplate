@@ -31,7 +31,7 @@ export const checkboxMachine = setup({
   actions: {
     initContext: assign(({ context }) => ({ ...context, isControlled: context.checked !== undefined })),
     setContext: assign(({ event, context }) => {
-      return event.type === "CHECKBOX.SET_CONTEXT" ? { ...context, ...event.context } : context;
+      return event.type === "SET_CONTEXT" ? { ...context, ...event.context } : context;
     }),
     syncControlledState: raise(({ context }) => getStateTransitionEventType(context.checked)),
   },
@@ -49,7 +49,7 @@ export const checkboxMachine = setup({
   entry: ["initContext"],
 
   on: {
-    "CHECKBOX.SET_CONTEXT": [
+    SET_CONTEXT: [
       { guard: "isControlled", actions: ["setContext", "syncControlledState"] },
       { actions: ["setContext"] },
     ],
