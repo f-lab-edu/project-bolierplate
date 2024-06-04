@@ -12,12 +12,13 @@ export interface CheckboxMachineInput {
 }
 
 export interface CheckboxMachineContext extends CheckboxMachineInput {
-  isControlled?: boolean;
+  isControlled: boolean;
   hover: boolean;
 }
 
 export type CheckboxMachineEvent =
   | { type: "SET_CONTEXT"; context: Partial<CheckboxMachineContext> }
+  | { type: "CHECKBOX.TOGGLE" }
   | { type: "CHECKBOX.CHECKED" }
   | { type: "CHECKBOX.UNCHECKED" }
   | { type: "CHECKBOX.INDETERMINATE" };

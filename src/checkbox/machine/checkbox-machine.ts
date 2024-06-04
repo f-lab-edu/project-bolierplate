@@ -34,7 +34,6 @@ export const checkboxMachine = setup({
   },
 
   actions: {
-    initContext: assign(({ context }) => ({ ...context, isControlled: context.checked !== undefined })),
     setContext: assign(({ event, context }) => {
       return event.type === "SET_CONTEXT" ? { ...context, ...event.context } : context;
     }),
@@ -48,10 +47,9 @@ export const checkboxMachine = setup({
     return {
       checked: input?.checked,
       hover: false,
+      isControlled: input?.checked !== undefined,
     };
   },
-
-  entry: ["initContext"],
 
   on: {
     SET_CONTEXT: [
@@ -68,14 +66,23 @@ export const checkboxMachine = setup({
   states: {
     checked: {
       description: "체크된 상태",
+      on: {
+        "CHECKBOX.TOGGLE": "unchecked",
+      },
     },
 
     unchecked: {
       description: "체크되지 않은 상태",
+      on: {
+        "CHECKBOX.TOGGLE": "checked",
+      },
     },
 
     indeterminate: {
       description: "부분적으로 체크된 상태",
+      on: {
+        "CHECKBOX.TOGGLE": "checked",
+      },
     },
   },
 });
