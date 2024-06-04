@@ -1,10 +1,10 @@
-import { setup, assign, raise } from "xstate";
+import { and, assign, not, raise, setup } from "xstate";
 
 import type {
   CheckStatus,
-  CheckboxMachineInput,
   CheckboxMachineContext,
   CheckboxMachineEvent,
+  CheckboxMachineInput,
 } from "../checkbox.types";
 
 const getStateTransitionEventType = (checked?: CheckStatus): CheckboxMachineEvent => {
@@ -31,6 +31,8 @@ export const checkboxMachine = setup({
 
   guards: {
     isControlled: ({ context }) => !!context.isControlled,
+    isEnabled: ({ context }) => !context.disabled,
+    isClickable: and(["isEnabled", not("isControlled")]),
   },
 
   actions: {
@@ -45,6 +47,7 @@ export const checkboxMachine = setup({
 
   context: ({ input }) => {
     return {
+      disabled: input?.disabled ?? false,
       checked: input?.checked,
       hover: false,
       isControlled: input?.checked !== undefined,
@@ -67,21 +70,30 @@ export const checkboxMachine = setup({
     checked: {
       description: "체크된 상태",
       on: {
-        "CHECKBOX.TOGGLE": "unchecked",
+        "CHECKBOX.TOGGLE": {
+          guard: "isClickable",
+          target: "unchecked",
+        },
       },
     },
 
     unchecked: {
       description: "체크되지 않은 상태",
       on: {
-        "CHECKBOX.TOGGLE": "checked",
+        "CHECKBOX.TOGGLE": {
+          guard: "isClickable",
+          target: "checked",
+        },
       },
     },
 
     indeterminate: {
       description: "부분적으로 체크된 상태",
       on: {
-        "CHECKBOX.TOGGLE": "checked",
+        "CHECKBOX.TOGGLE": {
+          guard: "isClickable",
+          target: "checked",
+        },
       },
     },
   },

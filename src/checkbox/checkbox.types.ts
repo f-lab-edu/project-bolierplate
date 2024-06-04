@@ -8,12 +8,14 @@ export type CheckboxMachineSend = (event: EventFromLogic<CheckboxMachine>) => vo
 export type CheckStatus = boolean | "indeterminate";
 
 export interface CheckboxMachineInput {
+  disabled?: boolean;
   checked?: CheckStatus;
 }
 
 export interface CheckboxMachineContext extends CheckboxMachineInput {
   isControlled: boolean;
   hover: boolean;
+  disabled: boolean;
 }
 
 export type CheckboxMachineEvent =
