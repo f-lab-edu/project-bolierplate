@@ -1,6 +1,9 @@
 import type { checkboxMachine } from "./machine/checkbox-machine";
+import type { EventFromLogic, SnapshotFrom } from "xstate";
 
 export type CheckboxMachine = typeof checkboxMachine;
+export type CheckboxMachineState = SnapshotFrom<CheckboxMachine>;
+export type CheckboxMachineSend = (event: EventFromLogic<CheckboxMachine>) => void;
 
 export type CheckStatus = boolean | "indeterminate";
 
