@@ -47,10 +47,11 @@ export const checkboxMachine = setup({
 
   context: ({ input }) => {
     return {
+      isControlled: input?.checked !== undefined,
       disabled: input?.disabled ?? false,
       checked: input?.checked,
       hover: false,
-      isControlled: input?.checked !== undefined,
+      focus: false,
     };
   },
 
