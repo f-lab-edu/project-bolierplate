@@ -15,6 +15,7 @@ export interface CheckboxMachineInput {
 export interface CheckboxMachineContext extends CheckboxMachineInput {
   isControlled: boolean;
   hover: boolean;
+  focus: boolean;
   disabled: boolean;
 }
 
