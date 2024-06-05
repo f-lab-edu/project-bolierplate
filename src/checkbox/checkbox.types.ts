@@ -1,5 +1,6 @@
 import type { checkboxMachineConnector } from "./machine/checkbox-connector";
 import type { checkboxMachine } from "./machine/checkbox-machine";
+import type { FocusEventHandler, KeyboardEventHandler, MouseEventHandler, PointerEventHandler } from "react";
 import type { EventFromLogic, SnapshotFrom } from "xstate";
 
 export type CheckboxMachine = typeof checkboxMachine;
@@ -13,6 +14,12 @@ export type CheckStatus = boolean | "indeterminate";
 export interface CheckboxMachineInput {
   disabled?: boolean;
   checked?: CheckStatus;
+  onPointerMove?: PointerEventHandler<HTMLButtonElement>;
+  onPointerLeave?: PointerEventHandler<HTMLButtonElement>;
+  onKeyDown?: KeyboardEventHandler<HTMLButtonElement>;
+  onFocus?: FocusEventHandler<HTMLButtonElement>;
+  onBlur?: FocusEventHandler<HTMLButtonElement>;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
 }
 
 export interface CheckboxMachineContext extends CheckboxMachineInput {

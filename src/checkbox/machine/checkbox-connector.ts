@@ -1,3 +1,5 @@
+import { combineEventHandlers } from "@/utils/react";
+
 import type { CheckboxMachineSend, CheckboxMachineState } from "../checkbox.types";
 import type { KeyboardEvent } from "react";
 
@@ -26,28 +28,26 @@ export const connector = (state: CheckboxMachineState, send: CheckboxMachineSend
       ...ariaAttr,
       "data-part": "root",
       disabled,
-      onPointerMove: () => {
+      onPointerMove: combineEventHandlers(state.context.onPointerMove, () => {
         if (disabled) return;
         send({ type: "SET_CONTEXT", context: { hover: true } });
-      },
-      onKeyDown: (event: KeyboardEvent<HTMLButtonElement>) => {
-        if (event.key === "Enter") event.preventDefault;
-      },
-      onPointerLeave: () => {
-        if (disabled) return;
+      }),
+      onPointerLeave: combineEventHandlers(state.context.onPointerLeave, () => {
         send({ type: "SET_CONTEXT", context: { hover: false } });
-      },
-      onFocus: () => {
-        if (disabled) return;
+      }),
+      onKeyDown: combineEventHandlers(state.context.onKeyDown, (event: KeyboardEvent<HTMLButtonElement>) => {
+        if (event.key === "Enter") event.preventDefault;
+      }),
+      onFocus: combineEventHandlers(state.context.onFocus, () => {
         send({ type: "SET_CONTEXT", context: { focus: true } });
-      },
-      onBlur: () => {
+      }),
+      onBlur: combineEventHandlers(state.context.onFocus, () => {
         if (disabled) return;
         send({ type: "SET_CONTEXT", context: { focus: false } });
-      },
-      onClick: () => {
+      }),
+      onClick: combineEventHandlers(state.context.onClick, () => {
         send({ type: "CHECKBOX.TOGGLE" });
-      },
+      }),
     },
   } as const;
 };
