@@ -14,10 +14,10 @@ declare global {
     }
   }
 
-  type ComponentPropsWithoutRefWithAsChild<
-    Comp extends ElementType,
-    Props extends Record<string, unknown> = unknown,
-  > = Combine<Combine<{ asChild?: boolean }, Props>, ComponentPropsWithoutRef<Comp>>;
+  type ComponentPropsWithoutRefWithAsChild<Comp extends ElementType, Props = unknown> = Combine<
+    Combine<{ asChild?: boolean }, Props>,
+    ComponentPropsWithoutRef<Comp>
+  >;
 
   type AriaAttributeWithRole = AriaAttributes & { role?: AriaRole };
 }
