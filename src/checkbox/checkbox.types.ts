@@ -35,3 +35,11 @@ export type CheckboxMachineEvent =
   | { type: "CHECKBOX.CHECKED" }
   | { type: "CHECKBOX.UNCHECKED" }
   | { type: "CHECKBOX.INDETERMINATE" };
+
+export type CheckboxProps = ComponentPropsWithoutRefWithAsChild<"button", CheckboxMachineInput>;
+
+export type CheckboxContext = {
+  checkboxMachineState: CheckboxMachineState;
+  send: CheckboxMachineSend;
+  api: CheckboxConnectorApi;
+};
