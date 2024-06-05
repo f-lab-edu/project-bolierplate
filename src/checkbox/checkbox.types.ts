@@ -1,6 +1,6 @@
 import type { checkboxMachineConnector } from "./machine/checkbox-connector";
 import type { checkboxMachine } from "./machine/checkbox-machine";
-import type { FocusEventHandler, KeyboardEventHandler, MouseEventHandler, PointerEventHandler } from "react";
+import type { FocusEventHandler, KeyboardEventHandler, MouseEventHandler, PointerEventHandler, ReactNode } from "react";
 import type { EventFromLogic, SnapshotFrom } from "xstate";
 
 export type CheckboxMachine = typeof checkboxMachine;
@@ -44,4 +44,7 @@ export type CheckboxContext = {
 
 export type CheckboxProps = ComponentPropsWithoutRefWithAsChild<"button", CheckboxMachineInput>;
 
-export type CheckboxIndicatorProps = ComponentPropsWithoutRefWithAsChild<"span">;
+export type CheckboxIndicatorProps = ComponentPropsWithoutRefWithAsChild<
+  "span",
+  { children: ReactNode | ((checkState: CheckStatus) => ReactNode) }
+>;

@@ -9,17 +9,23 @@ import type { ForwardedRef } from "react";
 
 export const CheckboxIndicator = forwardRef(
   (props: CheckboxIndicatorProps, forwardedRef: ForwardedRef<HTMLSpanElement>) => {
-    const { asChild, ...CheckboxIndicatorProps } = props;
+    const { asChild, children, ...CheckboxIndicatorProps } = props;
 
     const Comp = asChild ? Slot : "span";
 
     const checkboxContext = useCheckboxContext();
 
-    if (
-      checkboxContext?.checkboxMachineState.value === "indeterminate" ||
-      checkboxContext?.checkboxMachineState.value === "checked"
-    ) {
-      return <Comp ref={forwardedRef} {...CheckboxIndicatorProps} {...checkboxContext?.api.indicatorProps} />;
+    const currentCheckStatus =
+      checkboxContext?.checkboxMachineState.value === "indeterminate"
+        ? checkboxContext?.checkboxMachineState.value
+        : checkboxContext?.checkboxMachineState.value === "checked";
+
+    if (currentCheckStatus === "indeterminate" || currentCheckStatus) {
+      return (
+        <Comp ref={forwardedRef} {...CheckboxIndicatorProps} {...checkboxContext?.api.indicatorProps}>
+          {typeof children === "function" ? children(currentCheckStatus) : children}
+        </Comp>
+      );
     }
 
     return null;
