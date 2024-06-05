@@ -23,13 +23,13 @@ export const connector = (state: CheckboxMachineState, send: CheckboxMachineSend
 
   return {
     disabled,
+
     rootProps: {
       ...dataAttr,
       ...ariaAttr,
       "data-part": "root",
       disabled,
       onPointerMove: combineEventHandlers(state.context.onPointerMove, () => {
-        if (disabled) return;
         send({ type: "SET_CONTEXT", context: { hover: true } });
       }),
       onPointerLeave: combineEventHandlers(state.context.onPointerLeave, () => {
@@ -42,12 +42,16 @@ export const connector = (state: CheckboxMachineState, send: CheckboxMachineSend
         send({ type: "SET_CONTEXT", context: { focus: true } });
       }),
       onBlur: combineEventHandlers(state.context.onFocus, () => {
-        if (disabled) return;
         send({ type: "SET_CONTEXT", context: { focus: false } });
       }),
       onClick: combineEventHandlers(state.context.onClick, () => {
         send({ type: "CHECKBOX.TOGGLE" });
       }),
+    },
+
+    indicatorProps: {
+      ...dataAttr,
+      "data-part": "indicator",
     },
   } as const;
 };
