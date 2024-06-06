@@ -42,9 +42,10 @@ export type CheckboxContext = {
   api: CheckboxConnectorApi;
 };
 
-export type CheckboxProps = ComponentPropsWithoutRefWithAsChild<"button", CheckboxMachineInput>;
+export interface CheckboxProps extends ComponentPropsWithoutRefWithAsChild<"button">, CheckboxMachineInput {}
 
-export type CheckboxIndicatorProps = ComponentPropsWithoutRefWithAsChild<
-  "span",
-  { children: ReactNode | ((checkState: CheckStatus) => ReactNode) }
->;
+export interface CheckboxIndicatorProps
+  extends ComponentPropsWithoutRefWithAsChild<
+    "span",
+    { children: ReactNode | ((checkState: CheckStatus) => ReactNode) }
+  > {}
