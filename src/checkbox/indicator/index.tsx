@@ -1,15 +1,18 @@
+import clsx from "clsx";
 import { forwardRef } from "react";
 
 import { Slot } from "@/slot";
 
 import { useCheckboxContext } from "../root";
 
+import { base_checkbox_indicator } from "./indicator.css";
+
 import type { CheckboxIndicatorProps } from "../checkbox.types";
 import type { ForwardedRef } from "react";
 
 export const CheckboxIndicator = forwardRef(
   (props: CheckboxIndicatorProps, forwardedRef: ForwardedRef<HTMLSpanElement>) => {
-    const { asChild, children, ...CheckboxIndicatorProps } = props;
+    const { asChild, className, children, ...CheckboxIndicatorProps } = props;
 
     const Comp = asChild ? Slot : "span";
 
@@ -22,7 +25,12 @@ export const CheckboxIndicator = forwardRef(
 
     if (currentCheckStatus === "indeterminate" || currentCheckStatus) {
       return (
-        <Comp ref={forwardedRef} {...CheckboxIndicatorProps} {...checkboxContext?.api.indicatorProps}>
+        <Comp
+          className={clsx(base_checkbox_indicator, "base-checkbox-indicator", className)}
+          ref={forwardedRef}
+          {...CheckboxIndicatorProps}
+          {...checkboxContext?.api.indicatorProps}
+        >
           {typeof children === "function" ? children(currentCheckStatus) : children}
         </Comp>
       );
