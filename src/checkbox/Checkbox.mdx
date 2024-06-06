@@ -1,0 +1,43 @@
+import { Meta, Canvas, Controls, Markdown } from "@storybook/blocks";
+
+import * as CheckboxStories from "./Checkbox.stories.tsx";
+
+# Checkbox
+
+<Meta title="Components/Checkbox" of={CheckboxStories} />
+
+<Canvas of={CheckboxStories.Default} />
+
+<Controls of={CheckboxStories.Default} />
+
+## Data Attributes
+
+### rootProps
+
+<Markdown>
+  {`
+| Data Attr  |  Value    |
+|:----------:|:----------:|
+| data-scope | 'checkbox' |
+| data-part| 'root'|
+| data-hover | boolean |
+| data-state | indeterminate, checked, uncheked |
+| data-disabled | boolean |
+| data-focus | boolean |
+`}
+</Markdown>
+
+### indicatorProps
+
+<Markdown>
+  {`
+| Data Attr  |  Value    |
+|:----------:|:----------:|
+| data-scope | 'checkbox' |
+| data-part| 'indicator'|
+| data-hover | boolean |
+| data-state | indeterminate, checked, uncheked |
+| data-disabled | boolean |
+| data-focus | boolean |
+`}
+</Markdown>
