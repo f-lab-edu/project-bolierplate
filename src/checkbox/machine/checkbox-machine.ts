@@ -1,14 +1,9 @@
-import { and, assign, not, raise, setup } from "xstate";
+import { and, assign, enqueueActions, not, raise, setup } from "xstate";
 
-import type {
-  CheckStatus,
-  CheckboxMachineContext,
-  CheckboxMachineEvent,
-  CheckboxMachineInput,
-} from "../checkbox.types";
+import type { CheckboxMachineContext, CheckboxMachineEvent, CheckboxMachineInput } from "../checkbox.types";
 
-const getStateTransitionEventType = (checked?: CheckStatus): CheckboxMachineEvent => {
-  switch (checked) {
+const getStateTransitionEventType = (context: CheckboxMachineContext): CheckboxMachineEvent => {
+  switch (context.checked) {
     case "indeterminate": {
       return { type: "CHECKBOX.INDETERMINATE" };
     }
@@ -39,7 +34,8 @@ export const checkboxMachine = setup({
     setContext: assign(({ event, context }) => {
       return event.type === "SET_CONTEXT" ? { ...context, ...event.context } : context;
     }),
-    syncControlledState: raise(({ context }) => getStateTransitionEventType(context.checked)),
+    watchChecked: assign(({ context }) => ({ ...context, isControlled: context.checked !== undefined })),
+    syncControlledState: raise(({ context }) => getStateTransitionEventType(context)),
   },
 }).createMachine({
   /** @xstate-layout N4IgpgJg5mDOIC5QGMAWZkGsBGB7AHgMQDCAEgKLEDSAQgPIAaAdAMrkAqA+sXQHLvkG7ANoAGALqJQAB1ywAlgBd5uAHZSQ+RAA4ArE20B2XQBoQAT0QBGAEwBfO2bQYcBEhWr1mbLj36CRK0kkEFkFZTUNLQQATismABYrBNEANhtTC0RdbRsmGLSMhyd0LDwiMkpaRiZK6nIAETFgmTklFXUQ6N1DM0sEAGZDVKZU3XTdYpBnMrc66uYAVV55xuaNMPbIruzerIQEwxjR8aLHadLXCo8FpgBJXgaOcgAlAFkHgEEBdZDNiM6oG6e36NkMAxOEwc51UuAgcA0MyuGzaAKiiBifWsVkMiUKk3OSPKTCRkBR4Q66MGNmOMRsViMmX6A10CXy+KmRIITAArqpSRByVtAZpEAMafl6YysQceuyoYTLsT5Kp4YowAAnAC2KoAhuqhWidtTaVLjDKMvECgqHEA */
@@ -56,10 +52,17 @@ export const checkboxMachine = setup({
   },
 
   on: {
-    SET_CONTEXT: [
-      { guard: "isControlled", actions: ["setContext", "syncControlledState"] },
-      { actions: ["setContext"] },
-    ],
+    SET_CONTEXT: {
+      actions: [
+        "setContext",
+        "watchChecked",
+        enqueueActions(({ enqueue, check }) => {
+          if (check("isControlled")) {
+            enqueue("syncControlledState");
+          }
+        }),
+      ],
+    },
     "CHECKBOX.CHECKED": ".checked",
     "CHECKBOX.UNCHECKED": ".unchecked",
     "CHECKBOX.INDETERMINATE": ".indeterminate",
