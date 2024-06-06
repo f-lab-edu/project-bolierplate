@@ -25,7 +25,7 @@ const meta = {
   },
   parameters: {
     controls: {
-      exclude: /on*/,
+      exclude: /(on(?!CheckedChange)\w*)/,
     },
   },
 } satisfies Meta<typeof Checkbox>;
@@ -37,7 +37,7 @@ type Story = StoryObj<typeof meta>;
 const Template: Story = {
   render: (args) => (
     <>
-      <Checkbox {...args} id="my-checkbox">
+      <Checkbox {...args} id="my-checkbox" onCheckedChange={(state) => console.log(state)}>
         <CheckboxIndicator>
           {(state) => {
             return state === "indeterminate" ? <MinusIcon /> : <CheckIcon />;
