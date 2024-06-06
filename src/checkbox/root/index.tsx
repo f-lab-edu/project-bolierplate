@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { forwardRef } from "react";
 
 import { Slot } from "@/slot";
@@ -5,6 +6,8 @@ import { createContext, useMachine } from "@/utils/react";
 
 import { checkboxMachineConnector } from "../machine/checkbox-connector";
 import { checkboxMachine } from "../machine/checkbox-machine";
+
+import { base_checkbox_root } from "./root.css";
 
 import type { CheckboxContext, CheckboxProps } from "../checkbox.types";
 import type { ForwardedRef } from "react";
@@ -17,7 +20,7 @@ const [CheckboxProvider, useContext] = createContext<CheckboxContext>({
 export const useCheckboxContext = useContext;
 
 export const Checkbox = forwardRef((props: CheckboxProps, forwardedRef: ForwardedRef<HTMLButtonElement>) => {
-  const { asChild, ...checkboxProps } = props;
+  const { asChild, className, ...checkboxProps } = props;
   const Comp = asChild ? Slot : "button";
 
   const [state, send] = useMachine(checkboxMachine, {
@@ -36,7 +39,12 @@ export const Checkbox = forwardRef((props: CheckboxProps, forwardedRef: Forwarde
 
   return (
     <CheckboxProvider value={{ checkboxMachineState: state, send, api }}>
-      <Comp ref={forwardedRef} {...checkboxProps} {...api.rootProps} />
+      <Comp
+        className={clsx(base_checkbox_root, "base-checkbox-root", className)}
+        ref={forwardedRef}
+        {...checkboxProps}
+        {...api.rootProps}
+      />
     </CheckboxProvider>
   );
 });
