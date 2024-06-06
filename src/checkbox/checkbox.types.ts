@@ -14,6 +14,7 @@ export type CheckStatus = boolean | "indeterminate";
 export interface CheckboxMachineInput {
   disabled?: boolean;
   checked?: CheckStatus;
+  onCheckedChange?: (state: CheckStatus) => void;
   onPointerMove?: PointerEventHandler<HTMLButtonElement>;
   onPointerLeave?: PointerEventHandler<HTMLButtonElement>;
   onKeyDown?: KeyboardEventHandler<HTMLButtonElement>;

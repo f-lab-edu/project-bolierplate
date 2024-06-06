@@ -20,13 +20,14 @@ const [CheckboxProvider, useContext] = createContext<CheckboxContext>({
 export const useCheckboxContext = useContext;
 
 export const Checkbox = forwardRef((props: CheckboxProps, forwardedRef: ForwardedRef<HTMLButtonElement>) => {
-  const { asChild, className, ...checkboxProps } = props;
+  const { asChild, className, onCheckedChange, ...checkboxProps } = props;
   const Comp = asChild ? Slot : "button";
 
   const [state, send] = useMachine(checkboxMachine, {
     input: {
       checked: checkboxProps.checked,
       disabled: checkboxProps.disabled,
+      onCheckedChange,
       onPointerMove: checkboxProps?.onPointerMove,
       onPointerLeave: checkboxProps?.onPointerLeave,
       onKeyDown: checkboxProps?.onKeyDown,
