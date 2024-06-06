@@ -36,7 +36,7 @@ export const connector = (state: CheckboxMachineState, send: CheckboxMachineSend
         send({ type: "SET_CONTEXT", context: { hover: false } });
       }),
       onKeyDown: combineEventHandlers(state.context.onKeyDown, (event: KeyboardEvent<HTMLButtonElement>) => {
-        if (event.key === "Enter") event.preventDefault;
+        if (event.key === "Enter") event.preventDefault();
       }),
       onFocus: combineEventHandlers(state.context.onFocus, () => {
         send({ type: "SET_CONTEXT", context: { focus: true } });
