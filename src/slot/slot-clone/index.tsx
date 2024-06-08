@@ -2,7 +2,7 @@ import { Children, cloneElement, forwardRef, isValidElement } from "react";
 
 import { MergeProps } from "@/utils/services";
 
-import type { SlotProps } from "../root/Slot.types";
+import type { SlotProps } from "../slot.types";
 import type { ComponentPropsWithRef, ForwardedRef, MutableRefObject, ReactElement, Ref } from "react";
 
 const MAX_NUM_OF_SLOTTED_CHILDREN = 1;
