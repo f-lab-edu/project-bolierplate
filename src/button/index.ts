@@ -1,2 +1,2 @@
-export { Button } from "./Button";
-export { default as useButton } from "./Button/hooks/useButton";
+export { Button } from "./root";
+export { default as useButton } from "./root/hooks/useButton";
