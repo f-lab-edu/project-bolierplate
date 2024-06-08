@@ -1,4 +1,4 @@
-import type { ComponentPropsWithoutRef } from "react";
+import type { ComponentPropsWithoutRef, ReactNode } from "react";
 
 export interface SlotProps extends ComponentPropsWithoutRef<"element"> {
   /**
@@ -6,4 +6,8 @@ export interface SlotProps extends ComponentPropsWithoutRef<"element"> {
    * {@link https://github.com/radix-ui/primitives/issues/2631}
    */
   postProcessClassName?: (className: string) => string;
+}
+
+export interface SlottableProps {
+  children: ReactNode;
 }
