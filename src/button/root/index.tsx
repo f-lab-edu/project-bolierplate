@@ -3,10 +3,10 @@ import { forwardRef } from "react";
 
 import { Slot } from "@/slot";
 
-import { base_button_root } from "./Button.css";
+import { base_button_root } from "./button.css";
 import useButton from "./hooks/useButton";
 
-import type { ButtonProps } from "./Button.types";
+import type { ButtonProps } from "../button.types";
 import type { ForwardedRef } from "react";
 
 export const Button = forwardRef((props: ButtonProps, forwardedRef: ForwardedRef<HTMLButtonElement>) => {

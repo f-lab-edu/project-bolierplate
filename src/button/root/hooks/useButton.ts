@@ -1,4 +1,4 @@
-import type { ButtonProps } from "../Button.types";
+import type { ButtonProps } from "../../button.types";
 import type { ComponentPropsWithoutRef } from "react";
 
 const useButton = (buttonProps?: ButtonProps) => {
