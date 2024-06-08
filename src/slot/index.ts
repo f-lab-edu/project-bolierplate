@@ -1,2 +1,2 @@
-export { Slot, Root } from "./Slot";
-export { Slottable } from "./Slottable";
+export { Slot, Root } from "./root";
+export { Slottable } from "./slottable";
