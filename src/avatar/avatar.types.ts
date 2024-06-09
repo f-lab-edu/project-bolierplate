@@ -15,3 +15,5 @@ export type AvatarContext = {
 };
 
 export interface AvatarProps extends ComponentPropsWithoutRefWithAsChild<"span"> {}
+
+export interface AvatarImageProps extends ComponentPropsWithoutRefWithAsChild<"img"> {}
