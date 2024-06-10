@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 
 import { Slot } from "@/slot";
-import { createContext, useMachine } from "@/utils/react";
+import { createContext, mergeProps, useMachine } from "@/utils/react";
 
 import { avatarConnector } from "../machine/avatar-connector";
 import { avatarMachine } from "../machine/avatar-machine";
@@ -25,7 +25,7 @@ export const Avatar = forwardRef((props: AvatarProps, forwardedRef: ForwardedRef
 
   return (
     <AvatarProvider value={{ avatarMachineState: state, send, api }}>
-      <Comp ref={forwardedRef} {...avatarProps} {...api.rootProps} />
+      <Comp ref={forwardedRef} {...mergeProps(avatarProps, api.rootProps)} />
     </AvatarProvider>
   );
 });
