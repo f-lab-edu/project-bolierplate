@@ -8,12 +8,18 @@ export type AvatarMachineSend = (event: EventFromLogic<AvatarMachine>) => void;
 
 export type AvatarConnectorApi = ReturnType<typeof avatarConnector>;
 
+export interface AvatarMachineInput {}
+
+export interface AvatarMachineContext extends AvatarMachineInput {}
+
+export type AvatarMachineEvent = { type: "AVATAR.LOADED" } | { type: "AVATAR.ERROR" };
+
 export type AvatarContext = {
   avatarMachineState: AvatarMachineState;
   send: AvatarMachineSend;
   api: AvatarConnectorApi;
 };
 
-export interface AvatarProps extends ComponentPropsWithoutRefWithAsChild<"span"> {}
+export interface AvatarProps extends ComponentPropsWithoutRefWithAsChild<"span">, AvatarMachineInput {}
 
 export interface AvatarImageProps extends ComponentPropsWithoutRefWithAsChild<"img"> {}

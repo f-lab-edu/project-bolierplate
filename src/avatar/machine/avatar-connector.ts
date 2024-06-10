@@ -1,13 +1,17 @@
 import type { AvatarMachineSend, AvatarMachineState } from "../avatar.types";
 
-export const avatarConnector = (_state: AvatarMachineState, _send: AvatarMachineSend) => {
-  _state;
-  _send;
-
+export const avatarConnector = (_state: AvatarMachineState, send: AvatarMachineSend) => {
   return {
     rootProps: {},
 
-    imageProps: {},
+    imageProps: {
+      onLoad: () => {
+        send({ type: "AVATAR.LOADED" });
+      },
+      onError: () => {
+        send({ type: "AVATAR.ERROR" });
+      },
+    },
 
     fallbackProps: {},
   } as const;
