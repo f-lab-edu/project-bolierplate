@@ -1,6 +1,14 @@
 import { setup } from "xstate";
 
-export const avatarMachine = setup({}).createMachine({
+import type { AvatarMachineContext, AvatarMachineEvent, AvatarMachineInput } from "../avatar.types";
+
+export const avatarMachine = setup({
+  types: {
+    input: {} as AvatarMachineInput,
+    context: {} as AvatarMachineContext,
+    events: {} as AvatarMachineEvent,
+  },
+}).createMachine({
   id: "avatar",
 
   initial: "loading",
@@ -8,6 +16,14 @@ export const avatarMachine = setup({}).createMachine({
   states: {
     loading: {
       description: "초기상태 / 이미지 로드 중인 상태",
+      on: {
+        "AVATAR.LOADED": {
+          target: "loaded",
+        },
+        "AVATAR.ERROR": {
+          target: "error",
+        },
+      },
     },
     loaded: {
       description: "이미지 로드 완료 상태",
