@@ -1,6 +1,7 @@
 import { forwardRef } from "react";
 
 import { Slot } from "@/slot";
+import { mergeProps } from "@/utils/react";
 
 import { useAvatarContext } from "../root";
 
@@ -13,7 +14,7 @@ export const AvatarImage = forwardRef((props: AvatarImageProps, forwardedRef: Fo
 
   const avatarContext = useAvatarContext();
 
-  return <Comp ref={forwardedRef} {...avatarImageProps} {...avatarContext?.api.imageProps} />;
+  return <Comp ref={forwardedRef} {...mergeProps(avatarImageProps, avatarContext?.api.imageProps)} />;
 });
 
 AvatarImage.displayName = "Avatar.Image";
