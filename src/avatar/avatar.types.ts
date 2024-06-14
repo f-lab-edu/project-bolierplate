@@ -24,4 +24,13 @@ export interface AvatarProps extends ComponentPropsWithoutRefWithAsChild<"span">
 
 export interface AvatarImageProps extends ComponentPropsWithoutRefWithAsChild<"img"> {}
 
+export interface UseImageLoadingStatusArgs {
+  src?: HTMLImageElement["src"];
+  srcSet?: HTMLImageElement["srcset"];
+  crossOrigin?: HTMLImageElement["crossOrigin"];
+  referrerPolicy?: HTMLImageElement["referrerPolicy"];
+}
+
+export type ImageLoadingStatus = "IDLE" | "LOADING" | "SUCCESS" | "ERROR";
+
 export interface AvatarFallbackProps extends ComponentPropsWithoutRefWithAsChild<"span"> {}
