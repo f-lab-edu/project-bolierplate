@@ -5,7 +5,7 @@ on:
     branches:
       - develop
       - master
-      - [feature/fix]/[0-9]+-component*
+      - */[0-9]+-component*
 
 jobs:
   storybook-deploy:
