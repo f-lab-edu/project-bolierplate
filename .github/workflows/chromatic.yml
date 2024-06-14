@@ -2,7 +2,10 @@ name: "Chromatic Deployment"
 
 on:
   push:
-    branches: [develop]
+    branches:
+      - develop
+      - master
+      - feature/[0-9]+-component*
 
 jobs:
   storybook-deploy:
