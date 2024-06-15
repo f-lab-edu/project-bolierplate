@@ -1,6 +1,6 @@
 import type { avatarConnector } from "./machine/avatar-connector";
 import type { avatarMachine } from "./machine/avatar-machine";
-import type { Dispatch } from "react";
+import type { Dispatch, ReactNode } from "react";
 import type { EventFromLogic, SnapshotFrom } from "xstate";
 
 export type AvatarMachine = typeof avatarMachine;
@@ -35,4 +35,8 @@ export interface UseImageLoadingStatusArgs {
 
 export type ImageLoadingStatus = "IDLE" | "LOADING" | "SUCCESS" | "ERROR";
 
-export interface AvatarFallbackProps extends ComponentPropsWithoutRefWithAsChild<"span"> {}
+export interface AvatarFallbackProps
+  extends ComponentPropsWithoutRefWithAsChild<
+    "span",
+    { children?: ReactNode | ((status?: ImageLoadingStatus) => ReactNode) }
+  > {}
