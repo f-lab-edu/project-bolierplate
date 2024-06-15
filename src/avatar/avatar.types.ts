@@ -1,5 +1,6 @@
 import type { avatarConnector } from "./machine/avatar-connector";
 import type { avatarMachine } from "./machine/avatar-machine";
+import type { Dispatch } from "react";
 import type { EventFromLogic, SnapshotFrom } from "xstate";
 
 export type AvatarMachine = typeof avatarMachine;
@@ -15,9 +16,8 @@ export interface AvatarMachineContext extends AvatarMachineInput {}
 export type AvatarMachineEvent = { type: "AVATAR.LOADED" } | { type: "AVATAR.ERROR" };
 
 export type AvatarContext = {
-  avatarMachineState: AvatarMachineState;
-  send: AvatarMachineSend;
-  api: AvatarConnectorApi;
+  imageLoadingStatus: ImageLoadingStatus;
+  onImageLoadingStatusChange: Dispatch<ImageLoadingStatus>;
 };
 
 export interface AvatarProps extends ComponentPropsWithoutRefWithAsChild<"span">, AvatarMachineInput {}
