@@ -22,7 +22,9 @@ export type AvatarContext = {
 
 export interface AvatarProps extends ComponentPropsWithoutRefWithAsChild<"span">, AvatarMachineInput {}
 
-export interface AvatarImageProps extends ComponentPropsWithoutRefWithAsChild<"img"> {}
+export interface AvatarImageProps extends ComponentPropsWithoutRefWithAsChild<"img"> {
+  onImageLoadingStatusChange?: (status: ImageLoadingStatus) => void;
+}
 
 export interface UseImageLoadingStatusArgs {
   src?: HTMLImageElement["src"];
