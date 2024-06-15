@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { forwardRef, useState } from "react";
 
 import { Slot } from "@/slot";
@@ -14,7 +15,7 @@ const [AvatarProvider, useContext] = createContext<AvatarContext>({
 export const useAvatarContext = useContext;
 
 export const Avatar = forwardRef((props: AvatarProps, forwardedRef: ForwardedRef<HTMLSpanElement>) => {
-  const { asChild, ...avatarProps } = props;
+  const { asChild, className, ...avatarProps } = props;
 
   const Comp = asChild ? Slot : "span";
 
@@ -22,7 +23,7 @@ export const Avatar = forwardRef((props: AvatarProps, forwardedRef: ForwardedRef
 
   return (
     <AvatarProvider value={{ imageLoadingStatus, onImageLoadingStatusChange: setLoadingStatus }}>
-      <Comp ref={forwardedRef} {...avatarProps} />
+      <Comp ref={forwardedRef} className={clsx("base-avatar-root", className)} {...avatarProps} />
     </AvatarProvider>
   );
 });
