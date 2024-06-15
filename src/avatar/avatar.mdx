@@ -1,0 +1,48 @@
+import { Meta, Controls, Markdown, Title, Stories, Primary } from "@storybook/blocks";
+
+import * as AvatarStories from "./avatar.stories";
+
+<Title />
+
+<Meta title="Components/Avatar" of={AvatarStories} />
+
+<Primary />
+
+<Controls of={AvatarStories.Default} />
+
+<Stories />
+
+## Data Attributes
+
+### rootProps
+
+<Markdown>
+  {`
+| Data Attr  |  Value    |
+|:----------:|:----------:|
+| data-scope | 'avatar' |
+| data-part| 'root'|
+`}
+</Markdown>
+
+### imageProps
+
+<Markdown>
+  {`
+| Data Attr  |  Value    |
+|:----------:|:----------:|
+| data-scope | 'avatar' |
+| data-part| 'image'|
+`}
+</Markdown>
+
+### fallbackProps
+
+<Markdown>
+  {`
+| Data Attr  |  Value    |
+|:----------:|:----------:|
+| data-scope | 'avatar' |
+| data-part| 'fallback'|
+`}
+</Markdown>
