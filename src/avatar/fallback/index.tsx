@@ -1,7 +1,6 @@
 import { forwardRef } from "react";
 
 import { Slot } from "@/slot";
-import { mergeProps } from "@/utils/react";
 
 import { useAvatarContext } from "../root";
 
@@ -9,13 +8,15 @@ import type { AvatarFallbackProps } from "../avatar.types";
 import type { ForwardedRef } from "react";
 
 export const AvatarFallback = forwardRef((props: AvatarFallbackProps, forwardedRef: ForwardedRef<HTMLSpanElement>) => {
-  const { asChild, ...avatarFallbackProps } = props;
+  const { asChild, children, ...avatarFallbackProps } = props;
   const Comp = asChild ? Slot : "span";
 
   const avatarContext = useAvatarContext();
 
-  return avatarContext?.avatarMachineState.value !== "loaded" ? (
-    <Comp ref={forwardedRef} {...mergeProps(avatarFallbackProps, avatarContext?.api.fallbackProps)} />
+  return avatarContext?.imageLoadingStatus !== "SUCCESS" ? (
+    <Comp ref={forwardedRef} {...avatarFallbackProps}>
+      {typeof children === "function" ? children(avatarContext?.imageLoadingStatus) : children}
+    </Comp>
   ) : null;
 });
 
