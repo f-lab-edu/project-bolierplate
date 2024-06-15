@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { forwardRef, useLayoutEffect } from "react";
 
 import { Slot } from "@/slot";
@@ -11,7 +12,7 @@ import type { AvatarImageProps, ImageLoadingStatus } from "../avatar.types";
 import type { ForwardedRef } from "react";
 
 export const AvatarImage = forwardRef((props: AvatarImageProps, forwardedRef: ForwardedRef<HTMLImageElement>) => {
-  const { asChild, onImageLoadingStatusChange, ...avatarImageProps } = props;
+  const { asChild, onImageLoadingStatusChange, className, ...avatarImageProps } = props;
   const { src, srcSet, crossOrigin, referrerPolicy } = avatarImageProps;
 
   const Comp = asChild ? Slot : "img";
@@ -30,7 +31,9 @@ export const AvatarImage = forwardRef((props: AvatarImageProps, forwardedRef: Fo
     }
   }, [imageLoadingStatus, handleImageLoadingStatus]);
 
-  return imageLoadingStatus === "SUCCESS" ? <Comp ref={forwardedRef} {...avatarImageProps} /> : null;
+  return imageLoadingStatus === "SUCCESS" ? (
+    <Comp ref={forwardedRef} className={clsx("base-avatar-image", className)} {...avatarImageProps} />
+  ) : null;
 });
 
 AvatarImage.displayName = "Avatar.Image";
