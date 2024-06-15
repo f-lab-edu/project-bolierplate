@@ -2,7 +2,7 @@ import clsx from "clsx";
 import { forwardRef, useLayoutEffect } from "react";
 
 import { Slot } from "@/slot";
-import { useCallbackRef } from "@/utils/react";
+import { mergeProps, useCallbackRef } from "@/utils/react";
 
 import { useAvatarContext } from "../root";
 
@@ -32,7 +32,11 @@ export const AvatarImage = forwardRef((props: AvatarImageProps, forwardedRef: Fo
   }, [imageLoadingStatus, handleImageLoadingStatus]);
 
   return imageLoadingStatus === "SUCCESS" ? (
-    <Comp ref={forwardedRef} className={clsx("base-avatar-image", className)} {...avatarImageProps} />
+    <Comp
+      ref={forwardedRef}
+      className={clsx("base-avatar-image", className)}
+      {...mergeProps(avatarImageProps, avatarContext?.extraProps.imageProps)}
+    />
   ) : null;
 });
 

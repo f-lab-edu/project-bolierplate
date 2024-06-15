@@ -2,7 +2,9 @@ import clsx from "clsx";
 import { forwardRef, useState } from "react";
 
 import { Slot } from "@/slot";
-import { createContext } from "@/utils/react";
+import { createContext, mergeProps } from "@/utils/react";
+
+import { getAvatarExtraProps } from "../get-avatar-extra-props";
 
 import type { AvatarContext, AvatarProps, ImageLoadingStatus } from "../avatar.types";
 import type { ForwardedRef } from "react";
@@ -21,9 +23,15 @@ export const Avatar = forwardRef((props: AvatarProps, forwardedRef: ForwardedRef
 
   const [imageLoadingStatus, setLoadingStatus] = useState<ImageLoadingStatus>("IDLE");
 
+  const extraProps = getAvatarExtraProps();
+
   return (
-    <AvatarProvider value={{ imageLoadingStatus, onImageLoadingStatusChange: setLoadingStatus }}>
-      <Comp ref={forwardedRef} className={clsx("base-avatar-root", className)} {...avatarProps} />
+    <AvatarProvider value={{ imageLoadingStatus, onImageLoadingStatusChange: setLoadingStatus, extraProps }}>
+      <Comp
+        ref={forwardedRef}
+        className={clsx("base-avatar-root", className)}
+        {...mergeProps(avatarProps, extraProps.rootProps)}
+      />
     </AvatarProvider>
   );
 });

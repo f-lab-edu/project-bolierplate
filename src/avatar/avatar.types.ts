@@ -1,8 +1,12 @@
+import type { getAvatarExtraProps } from "./get-avatar-extra-props";
 import type { Dispatch, ReactNode } from "react";
+
+export type AvatarExtraProps = ReturnType<typeof getAvatarExtraProps>;
 
 export type AvatarContext = {
   imageLoadingStatus: ImageLoadingStatus;
   onImageLoadingStatusChange: Dispatch<ImageLoadingStatus>;
+  extraProps: AvatarExtraProps;
 };
 
 export interface AvatarProps extends ComponentPropsWithoutRefWithAsChild<"span"> {}
