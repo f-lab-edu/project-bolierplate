@@ -1,15 +1,16 @@
 import { assignInlineVars } from "@vanilla-extract/dynamic";
+import clsx from "clsx";
 import { forwardRef } from "react";
 
 import { Slot } from "@/slot";
 
-import { base_aspect_ratio_root_wrapper, ratio } from "./root.css";
+import { base_aspect_ratio_root_wrapper, base_aspect_ratio_root, ratio } from "./root.css";
 
 import type { AspectRatioProps } from "../aspect-ratio-types";
 import type { ForwardedRef } from "react";
 
 export const AspectRatio = forwardRef((props: AspectRatioProps, forwardedRef: ForwardedRef<HTMLDivElement>) => {
-  const { asChild, ratio: propsRatio = 1, ...aspectRatioProps } = props;
+  const { asChild, ratio: propsRatio = 1, className, ...aspectRatioProps } = props;
 
   const Comp = asChild ? Slot : "div";
 
@@ -20,7 +21,11 @@ export const AspectRatio = forwardRef((props: AspectRatioProps, forwardedRef: Fo
         [ratio]: propsRatio.toString(),
       })}
     >
-      <Comp ref={forwardedRef} {...aspectRatioProps} />
+      <Comp
+        ref={forwardedRef}
+        className={clsx(base_aspect_ratio_root, "base-aspect-ratio-root", className)}
+        {...aspectRatioProps}
+      />
     </div>
   );
 });
