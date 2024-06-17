@@ -10,7 +10,7 @@ export interface UseControllableParams<T> {
 
 export type SetStateFn<T> = (prevState?: T) => T;
 
-export const useControllable = <T>({ value, defaultValue, onChange }: UseControllableParams<T>) => {
+export const useControllableState = <T>({ value, defaultValue, onChange }: UseControllableParams<T>) => {
   const [unControlledValue, setUnControlledValue] = useState(defaultValue as T);
 
   const isControlled = value !== undefined;
