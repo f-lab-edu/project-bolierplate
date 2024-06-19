@@ -18,7 +18,7 @@ export const useImageLoadingStatus = ({ src, srcset, crossOrigin, referrerPolicy
 
     let ignore = false;
 
-    const image = new window.Image();
+    const image = new Image();
 
     updateLoadingStatus("LOADING");
 
@@ -26,8 +26,14 @@ export const useImageLoadingStatus = ({ src, srcset, crossOrigin, referrerPolicy
     image.onerror = () => updateLoadingStatus("ERROR");
     image.crossOrigin = crossOrigin ?? null;
     image.referrerPolicy = referrerPolicy ?? "strict-origin-when-cross-origin";
-    src && (image.src = src);
-    srcset && (image.srcset = srcset);
+
+    if (src) {
+      image.src = src;
+    }
+
+    if (srcset) {
+      image.srcset = srcset;
+    }
 
     return () => {
       ignore = true;
