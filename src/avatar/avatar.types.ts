@@ -15,12 +15,11 @@ export interface AvatarImageProps extends ComponentPropsWithoutRefWithAsChild<"i
   onImageLoadingStatusChange?: (status: ImageLoadingStatus) => void;
 }
 
-export interface UseImageLoadingStatusArgs {
-  src?: HTMLImageElement["src"];
-  srcSet?: HTMLImageElement["srcset"];
-  crossOrigin?: HTMLImageElement["crossOrigin"];
-  referrerPolicy?: HTMLImageElement["referrerPolicy"];
-}
+type PickedHTMLImageElement = Pick<HTMLImageElement, "src" | "srcset" | "crossOrigin" | "referrerPolicy">;
+
+export type UseImageLoadingStatusArgs = {
+  [T in keyof PickedHTMLImageElement]?: PickedHTMLImageElement[T];
+};
 
 export type ImageLoadingStatus = "IDLE" | "LOADING" | "SUCCESS" | "ERROR";
 

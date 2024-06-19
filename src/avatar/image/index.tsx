@@ -18,7 +18,7 @@ export const AvatarImage = forwardRef((props: AvatarImageProps, forwardedRef: Fo
   const Comp = asChild ? Slot : "img";
 
   const avatarContext = useAvatarContext();
-  const imageLoadingStatus = useImageLoadingStatus({ src, srcSet, crossOrigin, referrerPolicy });
+  const imageLoadingStatus = useImageLoadingStatus({ src, srcset: srcSet, crossOrigin, referrerPolicy });
 
   const handleImageLoadingStatus = useCallbackRef((status: ImageLoadingStatus) => {
     onImageLoadingStatusChange?.(status);

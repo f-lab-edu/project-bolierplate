@@ -2,11 +2,11 @@ import { useLayoutEffect, useState } from "react";
 
 import type { ImageLoadingStatus, UseImageLoadingStatusArgs } from "../avatar.types";
 
-export const useImageLoadingStatus = ({ src, srcSet, crossOrigin, referrerPolicy }: UseImageLoadingStatusArgs) => {
+export const useImageLoadingStatus = ({ src, srcset, crossOrigin, referrerPolicy }: UseImageLoadingStatusArgs) => {
   const [loadingStatus, setLoadingStatus] = useState<ImageLoadingStatus>("IDLE");
 
   useLayoutEffect(() => {
-    if (!src && !srcSet) {
+    if (!src && !srcset) {
       setLoadingStatus("ERROR");
       return;
     }
@@ -27,12 +27,12 @@ export const useImageLoadingStatus = ({ src, srcSet, crossOrigin, referrerPolicy
     image.crossOrigin = crossOrigin ?? null;
     image.referrerPolicy = referrerPolicy ?? "strict-origin-when-cross-origin";
     src && (image.src = src);
-    srcSet && (image.srcset = srcSet);
+    srcset && (image.srcset = srcset);
 
     return () => {
       ignore = true;
     };
-  }, [src, srcSet, crossOrigin, referrerPolicy]);
+  }, [src, srcset, crossOrigin, referrerPolicy]);
 
   return loadingStatus;
 };
